@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 101757025518892409}
   - component: {fileID: 101757025518892410}
   - component: {fileID: 101757025518892411}
-  - component: {fileID: 101757025518892412}
+  - component: {fileID: 674965952}
   m_Layer: 0
   m_Name: Rect
   m_TagString: Untagged
@@ -110,7 +110,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!50 &101757025518892412
+--- !u!50 &674965952
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0
@@ -122,7 +122,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 10
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1

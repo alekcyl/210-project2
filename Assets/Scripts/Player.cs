@@ -14,7 +14,7 @@ public class Player : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Space))
         {
-            GameObject shot = Instantiate(Missile, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.Euler(new Vector3(0,0,90)));
+            GameObject shot = Instantiate(Missile, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.Euler(new Vector3(0,0,-90)));
 
             
             shot.GetComponent<Rigidbody2D>().AddForce(new Vector2(1000, 0));

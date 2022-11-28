@@ -7,6 +7,7 @@ public class Missile : MonoBehaviour
     public float destroyTimerMax;
     private float destroyTimerCur;
     private bool setDestroy;
+    public ParticleSystem explosion;
     
     private void Start()
     {
@@ -23,12 +24,14 @@ public class Missile : MonoBehaviour
             if (destroyTimerCur <= 0)
             {
                 Destroy(gameObject);
+                
             }
         }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        Instantiate(explosion, transform.position, Quaternion.Euler(new Vector3(0,0,0)));
         setDestroy = true;
     }
 }

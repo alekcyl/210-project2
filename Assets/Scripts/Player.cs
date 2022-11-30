@@ -6,6 +6,8 @@ public class Player : MonoBehaviour
 {
     public float moveSpeed;
     public GameObject Missile;
+    public GameObject Missile2;
+    public float MissileSpeed;
 
 
 
@@ -17,6 +19,15 @@ public class Player : MonoBehaviour
             GameObject shot = Instantiate(Missile, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.Euler(new Vector3(0,0,-90)));
 
             
+            shot.GetComponent<Rigidbody2D>().AddForce(new Vector2(MissileSpeed, 0));
+
+        }
+
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            GameObject shot = Instantiate(Missile2, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.Euler(new Vector3(0, 0, -90)));
+
+
             shot.GetComponent<Rigidbody2D>().AddForce(new Vector2(1000, 0));
 
         }

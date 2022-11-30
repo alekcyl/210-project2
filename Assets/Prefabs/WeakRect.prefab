@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 101757025518892410}
   - component: {fileID: 674965952}
   - component: {fileID: 633461204}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: WeakRect
   m_TagString: Untagged
   m_Icon: {fileID: 0}

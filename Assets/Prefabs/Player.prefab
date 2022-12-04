@@ -99,3 +99,9 @@ MonoBehaviour:
   Missile: {fileID: 8680984437590390542, guid: 9672cc8e43c71407f8ca14d045bf2fac, type: 3}
   Missile2: {fileID: 3190816486456617272, guid: f5a7b6723714842d1b247e2165f7cb4c, type: 3}
   MissileSpeed: 400
+  Data:
+    currentLevel: 0
+  missileNumber: 0
+  enemiesNum: 0
+  SceneScript: {fileID: 3406166208579053051, guid: 37b0d669427844181ac79f2fe0b87fe1, type: 3}
+  curLevel: 0

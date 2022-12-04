@@ -22,7 +22,7 @@ public class Gravity : MonoBehaviour
             if (rb != null)
             {
                 Vector3 direction = transform.position - collider.transform.position;
-                Debug.Log(direction.magnitude);
+                //Debug.Log(direction.magnitude);
                 if (direction.magnitude > MinRadius)
                 { 
                     float distance = direction.sqrMagnitude * DistanceMultiplyer + 1;

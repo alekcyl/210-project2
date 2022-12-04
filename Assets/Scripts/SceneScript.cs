@@ -1,33 +1,54 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-//added to load scenes
 using UnityEngine.SceneManagement;
 
 public class SceneScript : MonoBehaviour
 {
-    //a new variable that you can change in the inspector
-    public string nextLevel;
+    public PlayerData Data;
 
-
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        
+        //load player data or create it
+        if (PlayerPrefs.HasKey("gamedata"))
+        {
+            string jsondata = PlayerPrefs.GetString("gamedata");
+            Debug.Log($"Loading Data: \n{jsondata}");
+            Data = JsonUtility.FromJson<PlayerData>(jsondata);
+            Debug.Log(jsondata);
+
+        }
+        else
+        {
+            Debug.Log("No saved data at 'gamedata'");
+            Data.currentLevel = 1;
+            string dataAsJSON = JsonUtility.ToJson(Data, true);
+            Debug.Log(dataAsJSON);
+            PlayerPrefs.SetString("gamedata", dataAsJSON);
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    //call if player loses level
+    public void RestartLevel()
     {
-        
+        SceneManager.LoadScene($"Level{Data.currentLevel}");
     }
 
-    //a public method that will run when you click the button
-    public void ButtonToChangeLevel()
+    //call if level must be changed. Must give level number
+    public void changeLevel(int num)
     {
-
-        //loads the scene written in the inspector
-        SceneManager.LoadScene(nextLevel);
-
+        SceneManager.LoadScene($"Level{num}");
     }
+
+    //main menu play button
+    public void playButton()
+    {
+        //Data.currentLevel = 1;
+        //string dataAsJSON = JsonUtility.ToJson(Data, true);
+        //Debug.Log(dataAsJSON);
+        //PlayerPrefs.SetString("gamedata", dataAsJSON);
+
+        SceneManager.LoadScene($"Level{Data.currentLevel}");
+    }
+
 }

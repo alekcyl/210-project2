@@ -100,7 +100,7 @@ MonoBehaviour:
   Missile2: {fileID: 2846031042570880556, guid: 5702af991a245a845b0bc4629f72f83a, type: 3}
   Data:
     currentLevel: 0
-  SceneScript: {fileID: 3406166208579053051, guid: 37b0d669427844181ac79f2fe0b87fe1, type: 3}
+  SceneScript: {fileID: 0}
   MissileText: {fileID: 0}
   curLevel: 0
   missileNumber: 0

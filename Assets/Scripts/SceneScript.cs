@@ -43,6 +43,7 @@ public class SceneScript : MonoBehaviour
     //main menu play button
     public void playButton()
     {
+        //if level system saves an inaccessable level number, uncomment this and press play button - alek
         //Data.currentLevel = 1;
         //string dataAsJSON = JsonUtility.ToJson(Data, true);
         //Debug.Log(dataAsJSON);

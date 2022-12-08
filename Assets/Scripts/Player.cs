@@ -19,6 +19,8 @@ public class Player : MonoBehaviour
     public float MissileSpeed;
     public float moveSpeed;
     public int MaxLevels;
+    public float finalMisMax;
+    public float finalMisCur;
 
 
     private void Start()
@@ -28,6 +30,7 @@ public class Player : MonoBehaviour
         MissileText.SetText($"Missile Number: {missileNumber} ");
 
         MaxLevels = 4;
+        finalMisCur = finalMisMax;
 
         //load player data or create it
         if (PlayerPrefs.HasKey("gamedata"))
@@ -63,31 +66,41 @@ public class Player : MonoBehaviour
         //find all enemies in level
         GameObject[] EnemyList = GameObject.FindGameObjectsWithTag("Enemy");
         enemiesNum = EnemyList.Length;
-       
-        //check win conditions
-        if(enemiesNum > 0 && missileNumber <= 0)
-        {
-            SceneScript.GetComponent<SceneScript>().RestartLevel();
-        } else if(enemiesNum <= 0)
-        {
-            if(curLevel < MaxLevels)
+
+
+        if(missileNumber <= 0 || enemiesNum == 0) {
+            if(finalMisCur <= 0)
             {
-                curLevel += 1;
+                //check win conditions
+                if (enemiesNum > 0 && missileNumber <= 0)
+                {
+                    SceneScript.GetComponent<SceneScript>().RestartLevel();
+                }
+                else if (enemiesNum <= 0)
+                {
+                    Debug.Log("In here");
+                    if (curLevel < MaxLevels)
+                    {
+                        curLevel += 1;
+                    }
+                    else
+                    {
+                        curLevel = 1;
+                    }
+
+                    saveData();
+                    SceneScript.GetComponent<SceneScript>().changeLevel(curLevel);
+                }
             } else
             {
-                curLevel = 1;
-            }
-            
-            saveData();
-            SceneScript.GetComponent<SceneScript>().changeLevel(curLevel);
-            
+                finalMisCur -= Time.deltaTime;
+            } 
         }
-
 
         //shooting mechanics
         if (Input.GetKeyDown(KeyCode.Space) && missileNumber >= 1)
         {
-            GameObject shot = Instantiate(Missile, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.Euler(new Vector3(0,0,-90)));
+            GameObject shot = Instantiate(Missile, new Vector3(transform.position.x+1, transform.position.y, transform.position.z), Quaternion.Euler(new Vector3(0,0,-90)));
             shot.GetComponent<Rigidbody2D>().AddForce(new Vector2(MissileSpeed, 0));
             missileNumber--;
             MissileText.SetText($"Missile Number: {missileNumber} ");

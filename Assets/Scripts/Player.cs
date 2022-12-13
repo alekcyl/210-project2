@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
     public PlayerData Data;
     public GameObject SceneScript;
     public TextMeshProUGUI MissileText;
+    public Button QuitButton;
 
     public int curLevel;
     public int missileNumber;
@@ -31,6 +32,8 @@ public class Player : MonoBehaviour
 
         MaxLevels = 4;
         finalMisCur = finalMisMax;
+
+        QuitButton.gameObject.SetActive(false);
 
         //load player data or create it
         if (PlayerPrefs.HasKey("gamedata"))
@@ -106,15 +109,24 @@ public class Player : MonoBehaviour
             MissileText.SetText($"Missile Number: {missileNumber} ");
 
         }
-
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            GameObject shot = Instantiate(Missile2, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.Euler(new Vector3(0, 0, -90)));
-
-
-            shot.GetComponent<Rigidbody2D>().AddForce(new Vector2(1000, 0));
+            if(QuitButton != null)
+            {
+                QuitButton.gameObject.SetActive(!QuitButton.gameObject.activeSelf);
+            }
+            
 
         }
+
+        //if (Input.GetKeyDown(KeyCode.E))
+        //{
+        //    GameObject shot = Instantiate(Missile2, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.Euler(new Vector3(0, 0, -90)));
+
+
+        //    shot.GetComponent<Rigidbody2D>().AddForce(new Vector2(1000, 0));
+
+        //}
 
         //movement mechanics
         float movementInput = Input.GetAxis("Vertical") * moveSpeed * Time.deltaTime;

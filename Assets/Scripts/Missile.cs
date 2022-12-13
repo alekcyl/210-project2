@@ -18,6 +18,7 @@ public class Missile : MonoBehaviour
    
     void FixedUpdate()
     {
+        //on collision start timer to blow up
         if (setDestroy)
         {
             destroyTimerCur -= .1f;
@@ -31,6 +32,7 @@ public class Missile : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        //create explosion
         Instantiate(explosion, transform.position, Quaternion.Euler(new Vector3(0,0,0)));
         setDestroy = true;
     }

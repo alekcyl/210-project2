@@ -3,53 +3,52 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class SceneScript : MonoBehaviour
+public class SceneScript: MonoBehaviour
 {
+    //reference to player data class
     public PlayerData Data;
 
-    private void Start()
+    public void Start()
     {
         //load player data or create it
-        if (PlayerPrefs.HasKey("gamedata"))
+        if(PlayerPrefs.HasKey("gamedata"))
         {
             string jsondata = PlayerPrefs.GetString("gamedata");
-            Debug.Log($"Loading Data: \n{jsondata}");
             Data = JsonUtility.FromJson<PlayerData>(jsondata);
-            Debug.Log(jsondata);
-
         }
         else
         {
-            Debug.Log("No saved data at 'gamedata'");
             Data.currentLevel = 1;
             string dataAsJSON = JsonUtility.ToJson(Data, true);
-            Debug.Log(dataAsJSON);
             PlayerPrefs.SetString("gamedata", dataAsJSON);
         }
     }
-
     //call if player loses level
     public void RestartLevel()
     {
         SceneManager.LoadScene($"Level{Data.currentLevel}");
     }
-
-    //call if level must be changed. Must give level number
+    //call if level must be changed. Give level number
     public void changeLevel(int num)
     {
         SceneManager.LoadScene($"Level{num}");
     }
-
-    //main menu play button
+    //main menu button
     public void playButton()
     {
-        //if level system saves an inaccessable level number, uncomment this and press play button - alek
-        //Data.currentLevel = 1;
-        //string dataAsJSON = JsonUtility.ToJson(Data, true);
-        //Debug.Log(dataAsJSON);
-        //PlayerPrefs.SetString("gamedata", dataAsJSON);
-
         SceneManager.LoadScene($"Level{Data.currentLevel}");
     }
 
+    //quit to menu button
+    public void quitButton()
+    {
+        Debug.Log("main menu");
+        SceneManager.LoadScene("Main_Menu");
+    }
+
+    //quit applicatiomn
+    public void closeApp()
+    {
+        Application.Quit();
+    }
 }

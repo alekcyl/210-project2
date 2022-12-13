@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Gravity : MonoBehaviour
 {
+    //Used this video for physics. it is for 3d so some adjustments had to be made
     //https://www.youtube.com/watch?v=yTL0V6LNHR8&list=LL&index=3
 
     public float PullRadius;
@@ -15,14 +16,13 @@ public class Gravity : MonoBehaviour
     private void FixedUpdate()
     {
         Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, PullRadius, LayersToPull);
-
+        //pull all gravity objects
         foreach(var collider in colliders)
         {
             Rigidbody2D rb = collider.GetComponent<Rigidbody2D>();
             if (rb != null)
             {
                 Vector3 direction = transform.position - collider.transform.position;
-                //Debug.Log(direction.magnitude);
                 if (direction.magnitude > MinRadius)
                 { 
                     float distance = direction.sqrMagnitude * DistanceMultiplyer + 1;
